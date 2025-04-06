@@ -101,7 +101,8 @@ def main():
                        \n3- Ver número de mascotas en el servicio 
                        \n4- Ver medicamentos que se están administrando
                        \n5- Eliminar mascota 
-                       \n6- Salir 
+                       \n6- Eliminar medicamento  
+                       \n7- Salir
                        \nUsted ingresó la opción: ''' ))
         if menu==1: # Ingresar una mascota 
             total_mascotas = len(caninos) + len(felinos)
@@ -195,8 +196,41 @@ def main():
 
             else:
                 print("No se ha podido eliminar la mascota")
+
+
+        elif menu ==6:
+            historia = int(input("Ingrese la historia clínica de la mascota: "))
+            mascota = caninos.get(historia) or felinos.get(historia)
+
+            if mascota:
+                medicamentos = mascota.verLista_Medicamentos()
+                if not medicamentos:
+                    print("Esta mascota no tiene medicamentos asignados.")
+                    continue
+
+                print("Medicamentos actuales:")
+                for i in medicamentos:
+                    print(f"- {i.verNombre()}")
+
+                nombre_a_eliminar = input("Ingrese el nombre del medicamento que desea eliminar: ").strip().lower()
+
+                encontrado = False
+                nueva_lista = []
+                for i in medicamentos:
+                    if i.verNombre().lower() != nombre_a_eliminar:
+                        nueva_lista.append(i)
+                    else:
+                        encontrado = True
+
+                if encontrado:
+                    mascota.asignarLista_Medicamentos(nueva_lista)
+                    print(f" Medicamento '{nombre_a_eliminar}' eliminado exitosamente.")
+                else:
+                    print(" El medicamento no fue encontrado.")
+            else:
+                print(" No se encontró la mascota.")
         
-        elif menu==6:
+        elif menu==7:
             print("Usted ha salido del sistema de servicio de hospitalización...")
             break
         
