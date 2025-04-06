@@ -116,6 +116,11 @@ def main():
 
                 for i in range(0,nm):
                     nombre_medicamentos = input("Ingrese el nombre del medicamento: ")
+                    nombres_existentes = [med.verNombre().lower() for med in lista_med]
+                    if nombre_medicamentos.lower() in nombres_extistentes:
+                        print("Ya se ha asignado un medicamento con este nombre, ingrese uno diferente")
+                        continue
+
                     dosis =int(input("Ingrese la dosis: "))
                     medicamento = Medicamento()
                     medicamento.asignarNombre(nombre_medicamentos)
@@ -183,4 +188,5 @@ if __name__=='__main__':
             
 
                 
+
 
