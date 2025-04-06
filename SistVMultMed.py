@@ -87,6 +87,8 @@ class sistemaV:
                 self.__lista_mascotas.remove(masc)  #opcion con el pop
                 return True  #eliminado con exito
         return False 
+   
+from datetime import datetime  # al inicio del archivo
 
 def main():
     caninos = {}
@@ -103,6 +105,12 @@ def main():
                        \nUsted ingresó la opción: ''' ))
         if menu==1: # Ingresar una mascota 
             total_mascotas = len(caninos) + len(felinos)
+            fecha = input("Ingrese la fecha de ingreso (dia/mes/año): ")
+            try:
+                datetime.strptime(fecha, "%d/%m/%Y")
+                break  # fecha válida, salir del ciclo
+            except ValueError:
+                 print("Formato de fecha inválido. Use dd/mm/aaaa (por ejemplo: 06/04/2025)")
             if total_mascotas >= 10:
                 print("No hay espacio ...") 
                 continue
